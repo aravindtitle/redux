@@ -1,16 +1,19 @@
-import React from "react";
-
+import React, { Fragment } from "react";
+import Header from "./components/Header";
+import Auth from "./components/Auth";
 import Counter from "./components/Counter";
-
-// Define your reducer function
+import { useSelector } from "react-redux";
+import UserProfile from "./components/UserProfile";
 
 const App = () => {
+  const isAuth = useSelector((state) => state.auth.isAuthenticated);
   return (
-    <>
-      {" "}
-      {/* Wrap your root component with Provider and pass your Redux store */}
-      <Counter /> {/* Your Counter component */}
-    </>
+    <Fragment>
+      <Header />
+      {!isAuth && <Auth />}
+      {isAuth && <UserProfile />}
+      <Counter />
+    </Fragment>
   );
 };
 
